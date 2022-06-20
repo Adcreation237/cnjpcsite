@@ -1,0 +1,34 @@
+<app-head-dort></app-head-dort>
+<div class="container-fluid py-5 mb-4">
+    <div class="row py-2 mt-2">
+        <div class="col-3">
+            <p-listbox [options]="items"  optionLabel="name" optionValue="id" [showToggleAll]="true" (onChange)="selectedDort($event)"></p-listbox>
+        </div>
+        <div class="col">
+            <div class="text-center p-5" *ngIf="jeunes==''">
+                <i class="pi pi-exclamation-triangle" style="font-size:30px;"></i>
+                <h5>Aucune donnée trouvée</h5>
+            </div>
+            <div class="row mb-4" *ngIf="jeunes!=''">
+                <div class="col-4" *ngFor="let jeune of jeunes">
+                    <div class="card" style="max-width: 100%;">
+                        <div class="row g-0">
+                            <div class="col-md-4" style="background: url({{jeune.picture}}); background-size: cover; background-repeat: no-repeat;">
+                                
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{jeune.lastname}} {{jeune.firstname}}</h6>
+                                    <span class="card-text" style="font-size: 12px;">
+                                        {{jeune.observation}}
+                                    </span>
+                                    <span><i class="card-text"><small class="text-muted">{{jeune.birthday}}</small></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

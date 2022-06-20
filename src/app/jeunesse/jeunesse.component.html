@@ -1,0 +1,81 @@
+<app-head-je></app-head-je>
+<div class="container-fluid py-3 mb-4">
+    <p-dialog header="Title" [(visible)]="display" (draggable)="true" (resizable)="true" [modal]="true" *ngIf="oneYouth!=null">
+        <ng-template pTemplate="header">
+            <h4>DETAIL DU JEUNE POUR CHRIST <b> {{oneYouth.lastname}} {{oneYouth.firstname}}</b></h4>
+        </ng-template>
+        <div class="row">
+            <div class="card" style="width: 100%;">
+                <img src="{{oneYouth.picture}}" class="card-img-top" alt="{{oneYouth.lastname}}">
+                <div class="card-body">
+                  <h5 class="card-title">{{oneYouth.lastname}} {{oneYouth.firstname}}</h5>
+                  <p class="card-text">{{oneYouth.observation}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">{{oneYouth.phone}}</li>
+                  <li class="list-group-item">{{oneYouth.sexe}}. {{oneYouth.birthday}}</li>
+                  <li class="list-group-item">{{oneYouth.poste}}</li>
+                </ul>
+              </div>
+        </div>
+    </p-dialog>
+    <div class="row py-2 mt-2">
+        <div class="col-12 bg-dark px-4 py-4">
+            <!--<p-multiSelect [options]="items" [selectionLimit]='1' [resetFilterOnHide]='false' [showToggleAll]='false' id="select-cir" [showHeader]='false'  optionLabel="name" optionValue="id" name="circons"  
+            placeholder="CHOISIR UNE CIRCONSCRIPTION" (onChange)="Onselected($event)"></p-multiSelect>
+            <p-selectButton [options]="items"  optionLabel="name" optionValue="id"  
+            (onChange)="Onselected($event)"></p-selectButton>-->
+            
+            <div class="row">
+                <div class="col-4">
+                    <h6 class="text-white">CHOISIR UNE CIRCONSCRIPTION :</h6>
+                    <p-dropdown [options]="items" optionLabel="name" dropdownIcon="pi pi-chevron-down"
+                        placeholder="CHOISIR UNE CIRCONSCRIPTION" optionValue="id" (onChange)="Onselected($event)">
+                    </p-dropdown>
+                </div>
+                <div class="col-4">
+                    <h6 class="text-white">CHOISIR UN SECTEUR :</h6>
+                    <p-dropdown [options]="secteurs" optionLabel="secteur" dropdownIcon="pi pi-chevron-down"
+                        placeholder="CHOISIR UN SECTEUR" optionValue="secteur" (onChange)="setSecteur($event)">
+                    </p-dropdown>
+                </div>
+                <div class="col-4">
+                    <h6 class="text-white">CHOISIR UNE LOCALITE :</h6>
+                    <p-dropdown [options]="localite" optionLabel="localite" dropdownIcon="pi pi-chevron-down"
+                        placeholder="CHOISIR UNE LOCALITE" optionValue="localite" (onChange)="setLocalite($event)">
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mt-4">
+            <div class="text-center p-5" *ngIf="jeunes==''">
+                <i class="pi pi-exclamation-triangle" style="font-size:30px;"></i>
+                <h5>Aucune donnée trouvée</h5>
+            </div>
+            <div class="row mb-4" *ngIf="jeunes!=''">
+                <div class="col-4" *ngFor="let jeune of jeunes">
+                    <div class="card" style="max-width: 100%;">
+                        <div class="row g-0">
+                            <div class="col-md-4" style="background: url({{jeune.picture}}); background-size: cover; background-repeat: no-repeat;">
+                                
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{jeune.lastname}} {{jeune.firstname}}</h6>
+                                    <span class="card-text" style="font-size: 12px;">
+                                        {{jeune.observation}}
+                                    </span>
+                                    <span><i class="card-text"><small class="text-muted">{{jeune.birthday}}</small></i></span>
+                                </div>
+                                <div class="card-footer">
+                                    <button pButton type="button" (click)="showDialog(jeune.id)" icon="pi pi-info-circle" label="visualiser"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
